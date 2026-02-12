@@ -9,3 +9,7 @@
 .cxx
 local.properties
 release
+
+# claude code
+CLAUDE.md
+.claude/
