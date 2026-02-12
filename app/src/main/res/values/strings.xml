@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">PsyLog</string>
+    <string name="live_activity_channel_name">Active Experience</string>
+    <string name="live_activity_channel_description">Shows timeline and substance info during an active experience</string>
+    <string name="live_activity_loading">Loading experience timeline…</string>
+    <string name="timeline_description">Experience timeline</string>
+    <string name="widget_description">Shows your active experience timeline on the home screen</string>
+    <string name="widget_loading">Loading…</string>
+    <string name="widget_no_active_experience">No active experience</string>
 </resources>

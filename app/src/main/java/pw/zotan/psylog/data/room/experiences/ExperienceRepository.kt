@@ -233,6 +233,9 @@ class ExperienceRepository @Inject constructor(private val experienceDao: Experi
             .flowOn(Dispatchers.IO)
             .conflate()
 
+    suspend fun getMostRecentActiveExperience(since: Instant) =
+        experienceDao.getMostRecentActiveExperience(since)
+
     fun getAllCustomUnitsFlow() = experienceDao.getAllCustomUnitsFlow()
         .flowOn(Dispatchers.IO)
         .conflate()

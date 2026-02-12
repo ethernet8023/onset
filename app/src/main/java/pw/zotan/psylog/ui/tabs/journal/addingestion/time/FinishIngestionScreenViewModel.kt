@@ -1,5 +1,6 @@
 package pw.zotan.psylog.ui.tabs.journal.addingestion.time
 
+import android.content.Context
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -19,7 +20,9 @@ import pw.zotan.psylog.ui.tabs.settings.combinations.UserPreferences
 import pw.zotan.psylog.ui.utils.getInstant
 import pw.zotan.psylog.ui.utils.getLocalDateTime
 import pw.zotan.psylog.ui.utils.getStringOfPattern
+import pw.zotan.psylog.service.LiveActivityManager
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -47,6 +50,8 @@ enum class IngestionTimePickerOption {
 @HiltViewModel
 class FinishIngestionScreenViewModel @Inject constructor(
     private val experienceRepo: ExperienceRepository,
+    private val liveActivityManager: LiveActivityManager,
+    @ApplicationContext private val appContext: Context,
     userPreferences: UserPreferences,
     state: SavedStateHandle
 ) : ViewModel() {
@@ -247,6 +252,7 @@ class FinishIngestionScreenViewModel @Inject constructor(
     fun createSaveAndDismissAfter(dismiss: () -> Unit) {
         viewModelScope.launch {
             createAndSaveIngestion()
+            liveActivityManager.startIfNeeded(appContext)
             withContext(Dispatchers.Main) {
                 dismiss()
             }

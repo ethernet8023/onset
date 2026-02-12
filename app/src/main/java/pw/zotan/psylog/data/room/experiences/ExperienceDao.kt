@@ -473,4 +473,12 @@ interface ExperienceDao {
 
     @Query("SELECT * FROM timednote WHERE experienceId =:experienceId")
     suspend fun getTimedNotes(experienceId: Int): List<TimedNote>
+
+    @Transaction
+    @Query(
+        "SELECT * FROM experience WHERE id IN " +
+                "(SELECT DISTINCT experienceId FROM ingestion WHERE time > :since) " +
+                "ORDER BY sortDate DESC LIMIT 1"
+    )
+    suspend fun getMostRecentActiveExperience(since: Instant): ExperienceWithIngestionsCompanionsAndRatings?
 }
