@@ -88,3 +88,27 @@ fun RoaDuration.toTotalTimeline(
         null
     }
 }
+
+// estimate total duration from whatever phases are available -
+// sums all non-null phase durations into a synthetic total range
+fun RoaDuration.toEstimatedTotalTimeline(
+    totalWeight: Float,
+    ingestionTimeRelativeToStartInSeconds: Float,
+    nonNormalisedHeight: Float,
+): TotalTimeline? {
+    val phases = listOfNotNull(onset, comeup, peak, offset, afterglow)
+    if (phases.isEmpty()) return null
+    val mins = phases.mapNotNull { it.minInSec }
+    val maxs = phases.mapNotNull { it.maxInSec }
+    if (mins.isEmpty() || maxs.isEmpty()) return null
+    val estimatedTotal = FullDurationRange(
+        minInSeconds = mins.sum(),
+        maxInSeconds = maxs.sum()
+    )
+    return TotalTimeline(
+        total = estimatedTotal,
+        totalWeight = totalWeight,
+        ingestionTimeRelativeToStartInSeconds = ingestionTimeRelativeToStartInSeconds,
+        nonNormalisedHeight = nonNormalisedHeight,
+    )
+}

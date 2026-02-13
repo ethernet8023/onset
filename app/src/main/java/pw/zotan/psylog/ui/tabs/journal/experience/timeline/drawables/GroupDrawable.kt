@@ -133,12 +133,23 @@ class GroupDrawable(
                                             )
                                         }
                                         onsets.ifEmpty {
-                                            weightedLinesForPointIngestions.map {
-                                                NoTimeline(
+                                            val estimatedTotals = weightedLinesForPointIngestions.mapNotNull {
+                                                roaDuration?.toEstimatedTotalTimeline(
+                                                    totalWeight = it.horizontalWeight,
                                                     ingestionTimeRelativeToStartInSeconds = getDistanceFromStartGraphInSeconds(
                                                         it.startTime
-                                                    )
+                                                    ),
+                                                    nonNormalisedHeight = it.height,
                                                 )
+                                            }
+                                            estimatedTotals.ifEmpty {
+                                                weightedLinesForPointIngestions.map {
+                                                    NoTimeline(
+                                                        ingestionTimeRelativeToStartInSeconds = getDistanceFromStartGraphInSeconds(
+                                                            it.startTime
+                                                        )
+                                                    )
+                                                }
                                             }
                                         }
                                     }
