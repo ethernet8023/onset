@@ -50,7 +50,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import computer.ethernet.onset.ui.YOU
 import computer.ethernet.onset.ui.tabs.search.substance.roa.toReadableString
-import computer.ethernet.onset.ui.theme.JournalTheme
+import computer.ethernet.onset.ui.theme.OnsetTheme
 import computer.ethernet.onset.ui.theme.horizontalPadding
 
 
@@ -75,7 +75,7 @@ fun StatsPreview(
         StatsPreviewProvider::class,
     ) statsModel: StatsModel
 ) {
-    JournalTheme {
+    OnsetTheme {
         StatsScreen(
             navigateToSubstanceCompanion = { _, _ -> },
             onTapOption = {},

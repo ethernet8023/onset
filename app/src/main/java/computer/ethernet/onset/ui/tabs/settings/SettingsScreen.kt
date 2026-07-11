@@ -27,7 +27,6 @@ import androidx.compose.material.icons.outlined.Medication
 import androidx.compose.material.icons.outlined.Palette
 import androidx.compose.material.icons.outlined.QuestionAnswer
 import androidx.compose.material.icons.outlined.Share
-import androidx.compose.material.icons.outlined.VolunteerActivism
 import androidx.compose.material.icons.outlined.WarningAmber
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ButtonDefaults
@@ -77,7 +76,6 @@ fun SettingsPreview() {
         navigateToComboSettings = {},
         navigateToSubstanceColors = {},
         navigateToCustomUnits = {},
-        navigateToDonate = {},
         importFile = {},
         exportFile = {},
         importFileError = remember { mutableStateOf(null) },
@@ -99,14 +97,12 @@ fun SettingsScreen(
     navigateToComboSettings: () -> Unit,
     navigateToSubstanceColors: () -> Unit,
     navigateToCustomUnits: () -> Unit,
-    navigateToDonate: () -> Unit,
 ) {
     SettingsScreen(
         navigateToFAQ = navigateToFAQ,
         navigateToComboSettings = navigateToComboSettings,
         navigateToSubstanceColors = navigateToSubstanceColors,
         navigateToCustomUnits = navigateToCustomUnits,
-        navigateToDonate = navigateToDonate,
         deleteEverything = viewModel::deleteEverything,
         importFile = viewModel::importFile,
         exportFile = viewModel::exportFile,
@@ -129,7 +125,6 @@ fun SettingsScreen(
     navigateToComboSettings: () -> Unit,
     navigateToSubstanceColors: () -> Unit,
     navigateToCustomUnits: () -> Unit,
-    navigateToDonate: () -> Unit,
     deleteEverything: () -> Unit,
     importFile: (uri: Uri) -> Unit,
     exportFile: (uri: Uri) -> Unit,
@@ -420,10 +415,6 @@ fun SettingsScreen(
                 ) {
                     uriHandler.openUri("mailto:onset@ethernet.computer")
                 }
-//                HorizontalDivider()
-//                SettingsButton(imageVector = Icons.Outlined.VolunteerActivism, text = "Donate") {
-//                    navigateToDonate()
-//                }
             }
             CardWithTitle(title = "App", innerPaddingHorizontal = 0.dp) {
                 SettingsButton(imageVector = Icons.Outlined.Code, text = "Source Code") {

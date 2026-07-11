@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltAndroidApp
-class JournalApplication : Application() {
+class OnsetApplication : Application() {
 
     @Inject
     lateinit var liveActivityManager: LiveActivityManager
@@ -23,9 +23,9 @@ class JournalApplication : Application() {
         // resume live activity service if there's an active experience
         applicationScope.launch {
             try {
-                liveActivityManager.startIfNeeded(this@JournalApplication)
+                liveActivityManager.startIfNeeded(this@OnsetApplication)
             } catch (e: Exception) {
-                Log.e("JournalApplication", "failed to start live activity service", e)
+                Log.e("OnsetApplication", "failed to start live activity service", e)
             }
         }
     }

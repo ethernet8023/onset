@@ -33,7 +33,7 @@ import computer.ethernet.onset.data.room.experiences.entities.SubstanceCompanion
 import computer.ethernet.onset.data.substances.classes.Tolerance
 import computer.ethernet.onset.ui.tabs.journal.experience.components.CardWithTitle
 import computer.ethernet.onset.ui.tabs.search.substance.roa.ToleranceSection
-import computer.ethernet.onset.ui.theme.JournalTheme
+import computer.ethernet.onset.ui.theme.OnsetTheme
 import computer.ethernet.onset.ui.theme.horizontalPadding
 import computer.ethernet.onset.ui.utils.getDateWithWeekdayText
 import computer.ethernet.onset.ui.utils.getShortTimeText
@@ -62,7 +62,7 @@ fun SubstanceCompanionScreen(
 @Preview
 @Composable
 fun SubstanceCompanionPreview(@PreviewParameter(SubstanceCompanionScreenPreviewProvider::class) pair: Pair<SubstanceCompanion, List<IngestionsBurst>>) {
-    JournalTheme {
+    OnsetTheme {
         SubstanceCompanionScreen(
             substanceCompanion = pair.first,
             ingestionBursts = pair.second,

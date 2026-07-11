@@ -69,7 +69,7 @@ import computer.ethernet.onset.ui.tabs.journal.addingestion.dose.StandardDeviati
 import computer.ethernet.onset.ui.tabs.journal.addingestion.time.IngestionTimePickerOption
 import computer.ethernet.onset.ui.tabs.journal.addingestion.time.TimePointOrRangePicker
 import computer.ethernet.onset.ui.tabs.journal.experience.components.CardWithTitle
-import computer.ethernet.onset.ui.theme.JournalTheme
+import computer.ethernet.onset.ui.theme.OnsetTheme
 import computer.ethernet.onset.ui.theme.horizontalPadding
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
@@ -126,7 +126,7 @@ fun EditIngestionScreen(
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun EditIngestionScreenPreview() {
-    JournalTheme {
+    OnsetTheme {
         EditIngestionScreen(
             note = "This is my note",
             onNoteChange = {},

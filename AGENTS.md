@@ -1,8 +1,8 @@
-# AGENTS.md — PsyLog Android
+# AGENTS.md — Onset Android
 
 ## What is this
 
-PsyLog (formerly PsychonautWiki Journal) is an Android harm-reduction app for
+Onset (formerly PsychonautWiki Journal / PsyLog) is an Android harm-reduction app for
 tracking recreational drug experiences. Users log ingestions, view substance
 timelines, check interactions, and get safer-use info. All data stays on-device.
 
@@ -10,7 +10,7 @@ timelines, check interactions, and get safer-use info. All data stays on-device.
 - **Origin**: Fork of `isaakhanimann/psychonautwiki-journal-android` (via PsyLog fork by zotan)
 - **Remote**: `github.com/ethernet8023/onset`
 - **License**: GPL-3.0 (see `COPYING`)
-- **Published on**: Google Play (`pw.zotan.psylog`), F-Droid, GitHub/Codeberg releases
+- **Published on**: GitHub releases
 
 ## Tech stack
 
@@ -31,11 +31,11 @@ timelines, check interactions, and get safer-use info. All data stays on-device.
 ## Project structure
 
 ```
-app/src/main/java/pw/zotan/psylog/
+app/src/main/java/computer/ethernet/onset/
 ├── MainActivity.kt              # Entry point — splash, edge-to-edge, notification perm
 ├── di/                           # Hilt modules + Application class
-│   ├── JournalApplication.kt     # @HiltAndroidApp, resumes LiveActivityService on launch
-│   ├── AppModule.kt              # Provides Room DB, DAO, DataStore
+│   ├── OnsetApplication.kt       # @HiltAndroidApp, resumes LiveActivityService on launch
+│   ├── AppModule.kt             # Provides Room DB, DAO, DataStore
 │   └── RepositoryModule.kt       # Binds repository interfaces to implementations
 ├── data/
 │   ├── room/
@@ -45,7 +45,7 @@ app/src/main/java/pw/zotan/psylog/
 │   │   │   ├── ExperienceRepository.kt  # Thin wrapper over DAO
 │   │   │   ├── entities/         # Room entities: Experience, Ingestion, etc.
 │   │   │   └── relations/        # @Relation POJOs (e.g. ExperienceWithIngestions)
-│   └── substances/
+│   │   └── substances/
 │       ├── classes/              # Domain models: Substance, Category, Roa, etc.
 │       │   └── roa/              # RoaDose, RoaDuration, IngestionPhase, DurationRange
 │       ├── parse/                # SubstanceParser — reads Substances.json
@@ -60,8 +60,8 @@ app/src/main/java/pw/zotan/psylog/
 │   ├── TimelineWidgetReceiver.kt # AppWidget receiver
 │   └── WidgetEntryPoint.kt       # Hilt EntryPoint for widget (can't use @Inject in Glance)
 └── ui/
-    ├── Constants.kt              # App-wide constants (disclaimers, URLs)
-    ├── theme/                    # Material 3 theme + colors
+    ├── Constants.kt              # App-wide constants (disclaimers, URLs, VERSION_NAME)
+    ├── theme/                    # Material 3 theme (OnsetTheme) + colors
     ├── main/                     # MainScreen, navigation, nav graphs
     │   └── navigation/graphs/    # Per-tab nav graphs (journal, stats, search, safer, settings)
     ├── utils/                    # Date/time helpers, keyboard utils
@@ -113,8 +113,8 @@ app/src/main/java/pw/zotan/psylog/
 ### Gradle flavors
 
 Two product flavors along `distribution` dimension:
-- **play**: Play Store build (`pw.zotan.psylog`)
-- **direct**: Direct/F-Droid build (`pw.zotan.psylog.direct`)
+- **play**: Play Store build (`computer.ethernet.onset`)
+- **direct**: Direct/F-Droid build (`computer.ethernet.onset.direct`)
 
 ### Build commands
 
@@ -140,19 +140,22 @@ signs APK, creates GitHub release with the signed APK. Uses JDK 17 (Zulu).
 ### Room migrations
 
 Database is at version 7 with auto-migrations (1→2→...→7). Schema JSON files
-live in `app/schemas/`. When adding/changing entities, bump the version in
-`AppDatabase.kt` and add an `AutoMigration` entry (or manual migration if
-complex). Room generates the migration at compile time via kapt.
+live in `app/schemas/computer.ethernet.onset.data.room.AppDatabase/`. When
+adding/changing entities, bump the version in `AppDatabase.kt` and add an
+`AutoMigration` entry (or manual migration if complex). Room generates the
+migration at compile time via kapt.
 
 ## Testing
 
-Unit tests are in `app/src/test/java/com/isaakhanimann/journal/` (package path
-is a leftover from the original project — test files use `pw.zotan.psylog`
-internally). Tests cover:
+Unit tests are in `app/src/test/java/computer/ethernet/onset/`. Tests cover:
 - `TestParse.kt` — SubstanceParser robustness + extract logic
 - `TestDates.kt` — Date utilities, axis label generation, time difference text
 - `TestRegex.kt` — Interaction wildcard matching (e.g. "5-MeO-xxT" → "5-MeO-DALT")
 - `DoubleReadableExtensionKtTest.kt` — Dose formatting
+
+Note: `TestDates` and `TestParse` have pre-existing failures — locale-dependent
+formatting and `org.json.JSONObject not mocked` (Android stub not available in
+host unit tests). These are not caused by the fork.
 
 No instrumented tests are configured for CI. Run with `gradle test`.
 
@@ -160,7 +163,8 @@ No instrumented tests are configured for CI. Run with `gradle test`.
 
 1. **Substances.json is a bundled asset** — not fetched at runtime. The full
    substance database ships in the APK at `app/src/main/assets/Substances.json`.
-   `SubstanceRepository` loads and parses it once in its `init` block.
+   `SubstanceRepository` loads and parses it once in its `init` block. All
+   substance URLs point to `psy.st` (a PsychonautWiki mirror).
 
 2. **Hilt + kapt** — annotation processing via kapt (not KSP). `kapt` must be
    applied last in the plugins block. `correctErrorTypes = true` is set.
@@ -181,20 +185,11 @@ No instrumented tests are configured for CI. Run with `gradle test`.
 6. **Timeline drawables** are in `ui/tabs/journal/experience/timeline/drawables/`.
    They draw on `Canvas` using `Path`, `DrawScope`, etc. The drawable type is
    chosen based on which duration phases are available for the substance's ROA.
-   `TimelineBitmapRenderer` (`.kt` in the timeline/ dir) renders these to a
-   `Bitmap` for use in notifications and widgets.
+   `TimelineBitmapRenderer` renders these to a `Bitmap` for use in notifications
+   and widgets.
 
-7. **URLs point to psy.st** — the fork replaced PsychonautWiki links with
-   `psy.st` equivalents.
-
-8. **No PR template** — `.github/` only has workflows, no PR template.
-
-9. **Test package path is stale** — tests are in `com.isaakhanimann.journal`
-   package dir but use `pw.zotan.psylog` imports internally. This is a
-   cosmetic leftover from the fork.
-
-10. **VERSION_NAME in Constants.kt is stale** (`"1.0"`) — the actual version
-    comes from `build.gradle.kts` (`versionName = "1.2"`).
+7. **VERSION_NAME in Constants.kt** must be kept in sync with `versionName` in
+   `app/build.gradle.kts`. It's displayed in Settings as "Version $VERSION_NAME".
 
 ## Key files for quick reference
 

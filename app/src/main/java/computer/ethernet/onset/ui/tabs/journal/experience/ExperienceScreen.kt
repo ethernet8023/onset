@@ -82,7 +82,7 @@ import computer.ethernet.onset.ui.tabs.journal.experience.models.ConsumerWithIng
 import computer.ethernet.onset.ui.tabs.journal.experience.models.CumulativeDose
 import computer.ethernet.onset.ui.tabs.journal.experience.models.OneExperienceScreenModel
 import computer.ethernet.onset.ui.tabs.journal.experience.timeline.AllTimelines
-import computer.ethernet.onset.ui.theme.JournalTheme
+import computer.ethernet.onset.ui.theme.OnsetTheme
 import computer.ethernet.onset.ui.theme.horizontalPadding
 import computer.ethernet.onset.ui.utils.getDateWithWeekdayText
 import kotlinx.coroutines.delay
@@ -159,7 +159,7 @@ fun ExperienceScreenPreview(
         limit = 1
     ) oneExperienceScreenModel: OneExperienceScreenModel
 ) {
-    JournalTheme {
+    OnsetTheme {
         ExperienceScreen(
             oneExperienceScreenModel = oneExperienceScreenModel,
             timelineDisplayOption = TimelineDisplayOption.Loading,

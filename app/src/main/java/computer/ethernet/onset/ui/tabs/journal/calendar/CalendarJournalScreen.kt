@@ -43,7 +43,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import computer.ethernet.onset.data.room.experiences.entities.AdaptiveColor
 import computer.ethernet.onset.data.room.experiences.relations.ExperienceWithIngestionsCompanionsAndRatings
 import computer.ethernet.onset.ui.tabs.journal.components.ExperienceRow
-import computer.ethernet.onset.ui.theme.JournalTheme
+import computer.ethernet.onset.ui.theme.OnsetTheme
 import computer.ethernet.onset.ui.theme.horizontalPadding
 import com.kizitonwose.calendar.compose.VerticalCalendar
 import com.kizitonwose.calendar.compose.rememberCalendarState
@@ -57,7 +57,7 @@ import java.time.YearMonth
 @Preview
 @Composable
 fun CalendarJournalScreenPreview() {
-    JournalTheme {
+    OnsetTheme {
         CalendarJournalScreen(
             navigateToExperiencePopNothing = {}
         )

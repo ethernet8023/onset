@@ -12,14 +12,14 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import computer.ethernet.onset.data.substances.classes.roa.DurationRange
 import computer.ethernet.onset.data.substances.classes.roa.RoaDuration
-import computer.ethernet.onset.ui.theme.JournalTheme
+import computer.ethernet.onset.ui.theme.OnsetTheme
 
 @Preview(showBackground = true)
 @Composable
 fun RoaDurationPreview(
     @PreviewParameter(RoaDurationPreviewProvider::class) roaDuration: RoaDuration
 ) {
-    JournalTheme {
+    OnsetTheme {
         RoaDurationView(roaDuration = roaDuration)
     }
 }

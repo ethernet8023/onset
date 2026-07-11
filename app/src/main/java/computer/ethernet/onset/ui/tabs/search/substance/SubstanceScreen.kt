@@ -64,7 +64,7 @@ import computer.ethernet.onset.ui.tabs.search.substance.roa.ToleranceSection
 import computer.ethernet.onset.ui.tabs.search.substance.roa.dose.RoaDoseView
 import computer.ethernet.onset.ui.tabs.search.substance.roa.duration.RoaDurationView
 import computer.ethernet.onset.ui.tabs.search.substance.roa.toReadableString
-import computer.ethernet.onset.ui.theme.JournalTheme
+import computer.ethernet.onset.ui.theme.OnsetTheme
 import computer.ethernet.onset.ui.theme.horizontalPadding
 import computer.ethernet.onset.ui.theme.verticalPaddingCards
 import computer.ethernet.onset.ui.utils.getShortTimeText
@@ -102,7 +102,7 @@ fun SubstanceScreen(
 fun SubstanceScreenPreview(
     @PreviewParameter(SubstanceWithCategoriesPreviewProvider::class) substanceWithCategories: SubstanceWithCategories
 ) {
-    JournalTheme {
+    OnsetTheme {
         SubstanceScreen(
             timelineDisplayOption = TimelineDisplayOption.Loading,
             ingestionTime = LocalDateTime.now(),

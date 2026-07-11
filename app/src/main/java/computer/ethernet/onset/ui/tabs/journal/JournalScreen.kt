@@ -53,7 +53,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import computer.ethernet.onset.data.room.experiences.relations.ExperienceWithIngestionsCompanionsAndRatings
 import computer.ethernet.onset.ui.tabs.journal.components.ExperienceRow
 import computer.ethernet.onset.ui.tabs.stats.EmptyScreenDisclaimer
-import computer.ethernet.onset.ui.theme.JournalTheme
+import computer.ethernet.onset.ui.theme.OnsetTheme
 import computer.ethernet.onset.ui.theme.horizontalPadding
 import kotlinx.coroutines.launch
 
@@ -94,7 +94,7 @@ fun ExperiencesScreenPreview(
         JournalScreenPreviewProvider::class,
     ) experiences: List<ExperienceWithIngestionsCompanionsAndRatings>,
 ) {
-    JournalTheme {
+    OnsetTheme {
         JournalScreen(
             navigateToExperiencePopNothing = {},
             navigateToAddIngestion = {},

@@ -234,7 +234,7 @@ fun DrugTestingScreen() {
             val reportServiceText = "Report missing service"
             TextButton(
                 onClick = {
-                    uriHandler.openUri("https://t.me/isaakhanimann")
+                    uriHandler.openUri("https://github.com/ethernet8023/onset/issues")
                 },
                 modifier = Modifier.semantics {
                     contentDescription = reportServiceText
