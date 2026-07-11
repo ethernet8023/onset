@@ -1,4 +1,4 @@
-PsyLog Journal lets you track which medications and substances you've taken in the past, and lets you analyze intake patterns and statistics.
+Onset lets you track which medications and substances you've taken in the past, and lets you analyze intake patterns and statistics.
 
 It is and will always be free, and will never introduce paid features, subscriptions, or other in-app purchases.
 All data remains on your device and fully within your control.

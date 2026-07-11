@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PsyLog</string>
+    <string name="app_name">Onset</string>
     <string name="live_activity_channel_name">Active Experience</string>
     <string name="live_activity_channel_description">Shows timeline and substance info during an active experience</string>
     <string name="live_activity_loading">Loading experience timeline…</string>

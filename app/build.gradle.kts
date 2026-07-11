@@ -9,11 +9,11 @@ plugins {
 }
 
 android {
-    namespace = "pw.zotan.psylog"
+    namespace = "computer.ethernet.onset"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "pw.zotan.psylog"
+        applicationId = "computer.ethernet.onset"
         minSdk = 26
         targetSdk = 35
         versionCode = 4

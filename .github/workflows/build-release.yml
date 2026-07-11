@@ -41,14 +41,14 @@ jobs:
 
       - name: Rename signed APK
         run: |
-          mv "${{steps.sign.outputs.signedFile}}" "psychonautwiki-journal_${{ github.ref_name }}.apk"
+          mv "${{steps.sign.outputs.signedFile}}" "onset_${{ github.ref_name }}.apk"
 
       # Uploads to the action results if not pointed at a tag
       - uses: actions/upload-artifact@v4
         if: "! startsWith(github.ref, 'refs/tags/')"
         with:
-          name: "psychonautwiki-journal_${{ github.ref_name }}.apk"
-          path: "psychonautwiki-journal_${{ github.ref_name }}.apk"
+          name: "onset_${{ github.ref_name }}.apk"
+          path: "onset_${{ github.ref_name }}.apk"
           if-no-files-found: error
 
       # Creates a release if pointed at a tag
@@ -56,6 +56,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: "psychonautwiki-journal_${{ github.ref_name }}.apk"
+          files: "onset_${{ github.ref_name }}.apk"
           fail_on_unmatched_files: true
           make_latest: true

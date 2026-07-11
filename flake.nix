@@ -1,5 +1,5 @@
 {
-  description = "PsyLog Android Application";
+  description = "Onset Android Application";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -92,7 +92,7 @@
             export JAVA_HOME=${jdk}
             export PATH=$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH
 
-            echo "Android development environment loaded"
+            echo "Android development environment loaded (Onset)"
             echo "ANDROID_HOME: $ANDROID_HOME"
             echo "JAVA_HOME: $JAVA_HOME"
             echo ""

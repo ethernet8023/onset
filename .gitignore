@@ -12,4 +12,4 @@ release
 
 # claude code
 CLAUDE.md
-.claude/
+.claude/.kotlin/
